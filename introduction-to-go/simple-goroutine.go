@@ -1,16 +1,21 @@
 package main
 
 import (
-    "fmt"
-    "time"
+	"fmt"
+	"time"
 )
 
-func printHelloWorld() {
-    fmt.Println("Hello world from goroutine!")
+func count(id string) {
+	for i := 1; i <= 5; i++ {
+		fmt.Println("Goroutine", id, "Tarefa:", i)
+		time.Sleep(time.Millisecond * 500)
+	}
 }
 
 func main() {
-    go printHelloWorld()
-    fmt.Println("Hello from main!")
-    time.Sleep(time.Second)
+	go count("Worker 1")
+	go count("Worker 2")
+	go count("Worker 2")
+	time.Sleep(time.Second * 3)
+	fmt.Println("Fim da função main.")
 }
